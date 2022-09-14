@@ -349,10 +349,6 @@ public class BukkitQuestsPlugin extends JavaPlugin implements Quests {
                 taskTypeManager.registerTaskType(new ShopGUIPlusBuyTaskType(this));
                 taskTypeManager.registerTaskType(new ShopGUIPlusSellTaskType(this));
             }
-            if (Bukkit.getPluginManager().isPluginEnabled("FabledSkyblock")) {
-                // not tested
-                taskTypeManager.registerTaskType(new FabledSkyblockLevelTaskType(this));
-            }
             if (Bukkit.getPluginManager().isPluginEnabled("SuperiorSkyblock2")) {
                 // not tested
                 taskTypeManager.registerTaskType(new SuperiorSkyblockLevelType(this));
