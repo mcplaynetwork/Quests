@@ -89,7 +89,7 @@ public class NormalQuestController implements QuestController {
                 Messages.send(preStartQuestEvent.getQuestResultMessage(), player);
             }
         }
-        if (code == QuestStartResult.QUEST_SUCCESS) {
+        if (code == QuestStartResult.QUEST_SUCCESS && player.hasPermission("quests.start")) {
             QuestProgress questProgress = qPlayer.getQuestProgressFile().getQuestProgress(quest);
             questProgress.setStarted(true);
             questProgress.setStartedDate(System.currentTimeMillis());
@@ -158,7 +158,7 @@ public class NormalQuestController implements QuestController {
         if (!qPlayer.getQuestProgressFile().hasMetRequirements(quest)) {
             return QuestStartResult.QUEST_LOCKED;
         }
-        if (quest.isPermissionRequired() || (p != null && !p.hasPermission("quests.start"))) {
+        if (quest.isPermissionRequired()) {
             if (p != null) {
                 if (!p.hasPermission("quests.quest." + quest.getId())) {
                     return QuestStartResult.QUEST_NO_PERMISSION;
