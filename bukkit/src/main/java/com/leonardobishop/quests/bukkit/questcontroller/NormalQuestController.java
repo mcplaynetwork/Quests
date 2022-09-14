@@ -80,6 +80,9 @@ public class NormalQuestController implements QuestController {
                 case NO_PERMISSION_FOR_CATEGORY:
                     questResultMessage = Messages.QUEST_CATEGORY_QUEST_PERMISSION.getMessage();
                     break;
+                case NO_PERMISSION_FOR_START:
+                    questResultMessage = Messages.QUEST_START_PERMISSION.getMessage();
+                    break;
             }
             // PreStartQuestEvent -- start
             PreStartQuestEvent preStartQuestEvent = new PreStartQuestEvent(player, qPlayer, questResultMessage, code);
@@ -88,8 +91,12 @@ public class NormalQuestController implements QuestController {
             if (code != QuestStartResult.QUEST_SUCCESS) {
                 Messages.send(preStartQuestEvent.getQuestResultMessage(), player);
             }
+
+            if (code == QuestStartResult.NO_PERMISSION_FOR_START) {
+                code = QuestStartResult.QUEST_SUCCESS;
+            }
         }
-        if (code == QuestStartResult.QUEST_SUCCESS && player.hasPermission("quests.start")) {
+        if (code == QuestStartResult.QUEST_SUCCESS) {
             QuestProgress questProgress = qPlayer.getQuestProgressFile().getQuestProgress(quest);
             questProgress.setStarted(true);
             questProgress.setStartedDate(System.currentTimeMillis());
@@ -158,7 +165,7 @@ public class NormalQuestController implements QuestController {
         if (!qPlayer.getQuestProgressFile().hasMetRequirements(quest)) {
             return QuestStartResult.QUEST_LOCKED;
         }
-        if (quest.isPermissionRequired()) {
+        if (quest.isPermissionRequired() || (p != null && !p.hasPermission("quests.start"))) {
             if (p != null) {
                 if (!p.hasPermission("quests.quest." + quest.getId())) {
                     return QuestStartResult.QUEST_NO_PERMISSION;
@@ -176,6 +183,9 @@ public class NormalQuestController implements QuestController {
             } else {
                 return QuestStartResult.NO_PERMISSION_FOR_CATEGORY;
             }
+        }
+        if (p != null && p.hasPermission("quests.start")) {
+            return QuestStartResult.NO_PERMISSION_FOR_START;
         }
         if (questProgress.isStarted() || quest.isAutoStartEnabled() || config.getBoolean("options.quest-autostart")) {
             return QuestStartResult.QUEST_ALREADY_STARTED;
