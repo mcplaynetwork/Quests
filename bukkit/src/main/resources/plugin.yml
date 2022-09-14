@@ -25,6 +25,9 @@ permissions:
   quests.command.random:
     description: Permission to execute /q random
     default: true
+  quests.start:
+    description: Permission for start quests
+    default: true
   quests.admin:
     description: Permission for the admin commands 
     default: op
