@@ -105,8 +105,6 @@ public class QItemStack {
                 ism.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 ism.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             } catch (Exception ignored) { }
-        } else if (player != null && player.hasPermission("quests.start")) {
-            tempLore.addAll(globalLoreAppendNotStarted);
         }
         if (plugin.getQuestsConfig().getBoolean("options.gui-use-placeholderapi")) {
             ism.setDisplayName(plugin.getPlaceholderAPIProcessor().apply(player, ism.getDisplayName()));

@@ -89,7 +89,7 @@ public class NormalQuestController implements QuestController {
                 Messages.send(preStartQuestEvent.getQuestResultMessage(), player);
             }
         }
-        if (code == QuestStartResult.QUEST_SUCCESS && player.hasPermission("quests.start")) {
+        if (code == QuestStartResult.QUEST_SUCCESS) {
             QuestProgress questProgress = qPlayer.getQuestProgressFile().getQuestProgress(quest);
             questProgress.setStarted(true);
             questProgress.setStartedDate(System.currentTimeMillis());
