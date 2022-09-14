@@ -9,6 +9,5 @@ public enum QuestStartResult {
     QUEST_ALREADY_STARTED, //5
     QUEST_NO_PERMISSION, //6
     NO_PERMISSION_FOR_CATEGORY, //7
-    NO_PERMISSION_FOR_START, //8
-    OTHER //9
+    OTHER //8
 }
