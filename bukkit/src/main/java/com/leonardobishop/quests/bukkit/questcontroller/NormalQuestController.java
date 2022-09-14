@@ -158,7 +158,7 @@ public class NormalQuestController implements QuestController {
         if (!qPlayer.getQuestProgressFile().hasMetRequirements(quest)) {
             return QuestStartResult.QUEST_LOCKED;
         }
-        if (quest.isPermissionRequired() || (p != null && p.hasPermission("quests.start"))) {
+        if (quest.isPermissionRequired() || (p != null && !p.hasPermission("quests.start"))) {
             if (p != null) {
                 if (!p.hasPermission("quests.quest." + quest.getId())) {
                     return QuestStartResult.QUEST_NO_PERMISSION;
