@@ -67,7 +67,6 @@ public class QuestsCommandSwitcher extends CommandSwitcher implements TabExecuto
         return true;
     }
 
-
     @Nullable
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
@@ -80,11 +79,21 @@ public class QuestsCommandSwitcher extends CommandSwitcher implements TabExecuto
                 .getDescription().getVersion() + " " + ChatColor.GRAY.toString() + ChatColor.STRIKETHROUGH + "]=------------");
         sender.sendMessage(ChatColor.GRAY + "The following commands are available: ");
         sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests " + ChatColor.DARK_GRAY + ": show quests");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests c/category <categoryid> " + ChatColor.DARK_GRAY + ": open category by ID");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests started " + ChatColor.DARK_GRAY + ": show started quests");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests start [questid]" + ChatColor.DARK_GRAY + ": start quest by name");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests track [questid]" + ChatColor.DARK_GRAY + ": track quest by name");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests cancel [questid]" + ChatColor.DARK_GRAY + ": cancel active quest by name");
+        if (sender.hasPermission(subcommands.get("category").getPermission())) {
+            sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests c/category <categoryid> " + ChatColor.DARK_GRAY + ": open category by ID");
+        }
+        if (sender.hasPermission(subcommands.get("started").getPermission())) {
+            sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests started " + ChatColor.DARK_GRAY + ": show started quests");
+        }
+        if (sender.hasPermission(subcommands.get("start").getPermission())) {
+            sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests start [questid]" + ChatColor.DARK_GRAY + ": start quest by name");
+        }
+        if (sender.hasPermission(subcommands.get("track").getPermission())) {
+            sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests track [questid]" + ChatColor.DARK_GRAY + ": track quest by name");
+        }
+        if (sender.hasPermission(subcommands.get("cancel").getPermission())) {
+            sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests cancel [questid]" + ChatColor.DARK_GRAY + ": cancel active quest by name");
+        }
         if (sender.hasPermission(subcommands.get("random").getPermission())) {
             sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests random " + ChatColor.DARK_GRAY + ": show random quests");
         }
