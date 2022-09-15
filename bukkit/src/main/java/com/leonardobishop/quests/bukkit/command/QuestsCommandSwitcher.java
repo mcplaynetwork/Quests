@@ -22,14 +22,14 @@ public class QuestsCommandSwitcher extends CommandSwitcher implements TabExecuto
         super(0);
         this.plugin = plugin;
 
-        super.subcommands.put("quest", new QuestCommandHandler(plugin));
         super.subcommands.put("category", new CategoryCommandHandler(plugin));
         super.subcommands.put("random", new RandomCommandHandler(plugin));
         super.subcommands.put("started", new StartedCommandHandler(plugin));
         super.subcommands.put("admin", new AdminCommandSwitcher(plugin));
+        super.subcommands.put("start", new StartCommandHandler(plugin));
+        super.subcommands.put("track", new TrackCommandHandler(plugin));
         super.subcommands.put("cancel", new CancelCommandHandler(plugin));
 
-        super.aliases.put("q", "quest");
         super.aliases.put("c", "category");
         super.aliases.put("a", "admin");
     }
@@ -81,9 +81,10 @@ public class QuestsCommandSwitcher extends CommandSwitcher implements TabExecuto
         sender.sendMessage(ChatColor.GRAY + "The following commands are available: ");
         sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests " + ChatColor.DARK_GRAY + ": show quests");
         sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests c/category <categoryid> " + ChatColor.DARK_GRAY + ": open category by ID");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests q/quest <questid> (start|cancel|track) " + ChatColor.DARK_GRAY + ": start, cancel or track quest by ID");
         sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests started " + ChatColor.DARK_GRAY + ": show started quests");
-        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests cancel [questid]" + ChatColor.DARK_GRAY + ": cancel active quest/quest by name");
+        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests start [questid]" + ChatColor.DARK_GRAY + ": start quest by name");
+        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests track [questid]" + ChatColor.DARK_GRAY + ": track quest by name");
+        sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests cancel [questid]" + ChatColor.DARK_GRAY + ": cancel active quest by name");
         if (sender.hasPermission(subcommands.get("random").getPermission())) {
             sender.sendMessage(ChatColor.DARK_GRAY + " * " + ChatColor.RED + "/quests random " + ChatColor.DARK_GRAY + ": show random quests");
         }
